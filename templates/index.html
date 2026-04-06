@@ -8,13 +8,24 @@
 </head>
 <body>
     <div class="container">
-        <h1> YouTube to MP3 Converter </h1>
         <!-- Converter -->
-        <form action="{{ url_for('convert') }}" method="POST">
-            <h3> YouTube URL: </h3>
-            <input type="text" name="url" placeholder="YouTube URL" required>
-            <button type="submit"> Convert to MP3 </button>
-        </form>
+        <h1> YouTube to MP3 Converter </h1>
+        
+        <div class="input-group">
+            <input type="text" id="urlInput" name="url" placeholder="Paste YouTube URL here..." required>
+            <button type="button" id="pasteBtn" title="Paste from clipboard"> 📋 </button>
+        </div>
+
+        <button type="button" id="convertBtn"> Convert to MP3 </button>
+        
+        <p id="statusMessage"></p>
     </div>
+
+    <form id="hiddenForm" action="{{ url_for('convert') }}" method="POST" target="downloadFrame" style="display:none;">
+        <input type="hidden" name="url" id="hiddenUrl">
+    </form>
+    <iframe name="downloadFrame" style="display:none;"></iframe>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
